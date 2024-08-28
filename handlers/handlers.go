@@ -124,30 +124,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
     w.Write(responseData)
 }
 
-// func UpdateUser(w http.ResponseWriter, r *http.Request) {
-//     var req employeeproto.UpdateUserRequest
-//     utils.Logger.Println("Inside UpdateUserFunction")
-//     if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-//         utils.Logger.Println("Failed to decode request body:", err)
-//         http.Error(w, "Failed to decode request body", http.StatusBadRequest)
-//         return
-//     }
-
-//     userCollection := db.Client.Database("employee").Collection("UserCollection")
-
-//     filter := bson.M{"id": req.UserId}
-//     update := bson.M{"$set": bson.M{"email": req.Email}}
-
-//     _, err := userCollection.UpdateOne(context.TODO(), filter, update)
-//     if err != nil {
-//         utils.Logger.Println("Failed to update user:", err)
-//         http.Error(w, "Failed to update user", http.StatusInternalServerError)
-//         return
-//     }
-
-//     w.WriteHeader(http.StatusOK)
-// }
-
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
     var req employeeproto.UpdateUserRequest
 
