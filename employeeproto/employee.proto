@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package employeeproto;
+
+// Request for getting user details by userId
+message UserRequest {
+    string userId = 1;
+}
+
+// Response for user details including employee information
+message UserResponse {
+    string userId = 1;
+    string firstname = 2;
+    string lastname = 3;
+    string email = 4;
+    string employeeId = 5;
+    string designation = 6;
+}
+
+// Request for creating a new user
+message CreateUserRequest {
+    string firstname = 1;
+    string lastname = 2;
+    string email = 3;
+    string designation = 4;
+}
+
+// Response after creating a new user
+message CreateUserResponse {
+    string userId = 1;
+}
+
+// Request for updating a user's email
+message UpdateUserRequest {
+    string userId = 1;
+    string email = 2;
+}
