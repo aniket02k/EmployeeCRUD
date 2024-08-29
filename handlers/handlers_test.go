@@ -64,8 +64,10 @@ func TestGetUser(t *testing.T) {
     }
 
     rr := httptest.NewRecorder()
-    handler := http.HandlerFunc(GetUser)
-    handler.ServeHTTP(rr, req)
+
+    // Use the userHandler struct
+    handler := NewUserHandler(userCollection, employeeCollection)
+    handler.GetUser(rr, req)
 
     assert.Equal(t, http.StatusOK, rr.Code)
 }
@@ -76,6 +78,9 @@ func TestCreateUser(t *testing.T) {
         t.Fatalf("Failed to connect to MongoDB: %v", err)
     }
     db.Client = client
+
+    userCollection := client.Database("employee").Collection("UserCollection")
+    employeeCollection := client.Database("employee").Collection("EmployeeCollection")
 
     reqBody := `{
         "firstname": "Jane",
@@ -90,9 +95,10 @@ func TestCreateUser(t *testing.T) {
     req.Header.Set("Content-Type", "application/json")
 
     rr := httptest.NewRecorder()
-    handler := http.HandlerFunc(CreateUser)
-    handler.ServeHTTP(rr, req)
+
+    // Use the userHandler struct
+    handler := NewUserHandler(userCollection, employeeCollection)
+    handler.CreateUser(rr, req)
 
     assert.Equal(t, http.StatusOK, rr.Code)
 }
-
